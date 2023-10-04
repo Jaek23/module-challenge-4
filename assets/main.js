@@ -6,119 +6,77 @@ var timerElement = document.querySelector(".countdown");
 var resultText = document.querySelector(".results")
 var mainHeader = document.querySelector(".main-header");
 var instructions = document.querySelector(".instructions");
+var scoreInputSection = document.querySelector (".score-page");
 var currentQuestionIndex = 0;
+var instructionSection = document.querySelector(".start")
 
 //This is the questions variable that is holding all the quiz questions and answer options//
 var questions = [
     {
         question: "Which data type has quotation marks?",
-        answers:[
-                 {text:"Strings"}, 
-                 {text:"Objects"}, 
-                 {text:"Arrays"}, 
-                 {text:"Boolean"}
-                ],
+        answers:["Strings","Objects", "Arrays","Boolean"],       
         correct:"Strings"
     },
 
     {
         question:"A boolean data type can only eqaul to true/false values?",
-        answers:[
-                {text:"True"},
-                {text:"False"}
-                ],
+        answers:["True","False"],        
         correct:"True"        
     },
 
     {
         question:"Which property is used to get the amount of items in an array?",
-        answers:[
-                 {text:"Concat"},
-                 {text:"Push"},
-                 {text:"Length"} ,
-                 {text:"Size"}
-                ],
+        answers:["Concat","Push", "Length","Size"],    
         correct:"Length"
     },
 
     {
         question:"Which method is used to merge two or more arrays?",
-        answers:[
-                {text:"For Each"},
-                {text:"Concat"}, 
-                {text:"Slice"},
-                {text:"Sort"}
-                ],
+        answers:["For Each","Concat", "Slice","Sort"],      
         correct:"Concat"
     },
 
     {
         question:"Can array data types hold in other data types inside?",
-        answers:[
-                {text:"True"},  
-                {text:"False"}
-                ],
+        answers:["True", "False"],       
         correct:"True"
     },
    
 ]
 
-//setting this variable to index 0 so the var currentQuestions is eqaul to questions[0]//
-
 startButton.addEventListener("click", function(){
-    startButton.style.display = "none"
-    mainHeader.style.display = "none"
-    instructions.style.display = "none"
-    var firstQuestion = questions[currentQuestionIndex];
-    questionElement.innerHTML = firstQuestion.question
-
-firstQuestion.answers.forEach(answer=>{
-    var firstAnswerList = document.createElement("li");
-    answerElement.appendChild(firstAnswerList);
-    firstAnswerButton = document.createElement("button");
-    firstAnswerList.appendChild(firstAnswerButton);
-    firstAnswerButton.innerHTML = answer.text;
-    firstAnswerButton.addEventListener("click", function(event){
-        if(event.target.textContent === questions[currentQuestionIndex].correct){
-            resultText.textContent= "Correct!"    
-        }
-            resetStateFirst()
-            showQuestionAndAnswers()
-    })
     countdown();
-    })
-})
+    showQuestionsAndAnswers();
+    });   
 
-var newCurrentQuestionIndex = 1;
-function showQuestionAndAnswers(){
-    var currentQuestion = questions[newCurrentQuestionIndex];
+    
+function showQuestionsAndAnswers(){
+    instructionSection.setAttribute('class', 'hide')
+    questionElement.setAttribute('class', 'start')
+    answerElement.setAttribute('class', 'start')
+    var currentQuestion = questions[currentQuestionIndex];
     questionElement.innerHTML = currentQuestion.question;
+    currentQuestionIndex++
+    resetState()
     
     currentQuestion.answers.forEach(answer=>{
-        var answerList = document.createElement("li");
-        answerElement.appendChild(answerList);
         var answerButton = document.createElement("button");
-        answerList.appendChild(answerButton);
-        answerButton.innerHTML = answer.text;
-console.log(`correct==> ${questions[newCurrentQuestionIndex].correct}`)
-console.log(`event ==> ${event.target.textContent}`)
-    answerButton.addEventListener("click", function(event){
-        resetState()
-        if (newCurrentQuestionIndex < questions.length){ 
-            newCurrentQuestionIndex++
-            showQuestionAndAnswers();       
-        }
-        if(event.target.textContent === questions[newCurrentQuestionIndex].correct){
-            resultText.textContent= "Correct!" 
-            
-        }
-     
-        })
+        answerElement.appendChild(answerButton);
+        answerButton.innerHTML = answer;
+        answerButton.addEventListener("click", showQuestionsAndAnswers);
 
     })
-   
-    
-  }
+
+}
+
+function answerClick(event){
+    var buttonElement = event.target;
+
+
+    if (buttonElement.value === questions[currentQuestionIndex].correct){
+        resultText.textContent = "Correct"
+    }
+}
 
 
 
@@ -145,19 +103,30 @@ function resetState(){
     }
 }
 
-function resetStateFirst(){
-    questionElement.removeChild(questionElement.firstChild)
-    while(answerElement.firstChild){
-        answerElement.removeChild(answerElement.firstChild)
-    }
-}
+//function nextQuestion(){
+//    
+//    var currentQuestion = questions[currentQuestionIndex];
+//    questionElement.innerHTML = currentQuestion.question;
+
+//    currentQuestion.answers.forEach(answer=>{
+//        var answerButton = document.createElement("button");
+//        answerElement.appendChild(answerButton);
+//        answerButton.innerHTML = answer.text;
+//        answerButton.addEventListener("click", showNextQuestion);{
+           
+//      }
+//    });   
+// }
 
 
-
-//function nextQuestionAndAnswers(e){
-//    if (currentQuestionIndex < questions.length){
-//        currentQuestionIndex++  
-//        showQuestionAndAnswers();
-        
+//function showNextQuestion (event){
+//    //currentQuestionIndex++
+//    if(currentQuestionIndex<questions.length){
+//        nextQuestion();
 //    }
-   
+//    if(event.target.textContent === questions[currentQuestionIndex].correct){
+//        resultText.textContent = "Correct!"
+//    }
+    
+// console.log(`correct==> ${questions[currentQuestionIndex].correct}`)
+//    console.log(`event ==> ${event.target.textContent}`)

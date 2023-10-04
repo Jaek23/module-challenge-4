@@ -33,3 +33,10 @@ p{
     display: flex;
     justify-content: center;
 }
+.hide{
+    display:none;
+}
+
+.start{
+    text-align: center;
+}
