@@ -9,6 +9,7 @@ var instructions = document.querySelector(".instructions");
 var scoreInputSection = document.querySelector (".score-page");
 var currentQuestionIndex = 0;
 var instructionSection = document.querySelector(".start")
+var results = document.querySelector(".results")
 
 //This is the questions variable that is holding all the quiz questions and answer options//
 var questions = [
@@ -54,6 +55,7 @@ function showQuestionsAndAnswers(){
     instructionSection.setAttribute('class', 'hide')
     questionElement.setAttribute('class', 'start')
     answerElement.setAttribute('class', 'start')
+    //results.setAttribute('class', 'start')
     var currentQuestion = questions[currentQuestionIndex];
     questionElement.innerHTML = currentQuestion.question;
     currentQuestionIndex++
@@ -71,14 +73,15 @@ function showQuestionsAndAnswers(){
     //console.log(`correct==> ${questions[currentQuestionIndex].correct}`)
     //console.log(`event ==> ${event.target.textContent}`)
 }
+
 function answerClick(event){
     var buttonElement = event.target;
     if(buttonElement.innerhHTML === questions[currentQuestionIndex -1].correct){
         var resultText = document.getElementById("result-text");
         resultText.textContent = "Answer is correct!"
     }
+    showQuestionsAndAnswers();
 }
-
 function countdown(){
     var timeLeft = 60;
     var timeInterval = setInterval(function(){
