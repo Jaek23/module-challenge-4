@@ -14,8 +14,9 @@ var score = 0;
 var scoreDisplay = document.querySelector(".scoredisplay")
 var timeLeft = 30;
 var intialBox = document.querySelector(".intialbox")
+var playAgain = document.querySelector(".playagain")
 
-//This is the questions variable that is holding all the quiz questions and answer options//
+//This is the questions variable that is holding all the quiz questions and answer options
 var questions = [
     {
         question: "Which data type has quotation marks?",
@@ -48,13 +49,13 @@ var questions = [
     },
    
 ]
-
+//Event listner for the start quiz button that will generate the first question and answers 
 startButton.addEventListener("click", function(){
     countdown();
     showQuestionsAndAnswers();
     });   
 
-    
+//This function will create elements with the questions and answers that will be displayed on the webpage    
 function showQuestionsAndAnswers(){
     instructionSection.setAttribute('class', 'hide')
     questionElement.setAttribute('class', 'start')
@@ -65,7 +66,7 @@ function showQuestionsAndAnswers(){
 
     var resultText = document.getElementById("result-text");
     resultText.textContent = " ";
-    
+//The answer choices are in an array so we are going to for Each loop to grab each answer choice and and make it into a button and diaplay it on the webpage 
     currentQuestion.answers.forEach(answer=>{
         var answerButton = document.createElement("button");
         answerElement.appendChild(answerButton);
@@ -76,10 +77,8 @@ function showQuestionsAndAnswers(){
             }
         }
     })
-    //console.log(`correct==> ${questions[currentQuestionIndex].correct}`)
-    //console.log(`event ==> ${event.target.textContent}`)
 }
-
+//This is the event.target function that has if conditonals meaning when the answerButton is clicked and it matches a specific requirement it will run this function 
 function answerClick(event){
     var resultText = document.getElementById("result-text");
     var buttonElement =event.target;
@@ -100,7 +99,7 @@ function answerClick(event){
     
 }
 
-
+//Timer function that will run when you start the quiz 
 function countdown(){
     var timeInterval = setInterval(function(){
         if (timeLeft > 1){
@@ -124,17 +123,15 @@ function countdown(){
         }
     }, 1000
 )}
+
+//This function will remove the previous question choices and we are running it on the showQuestionsAndAnswers function 
 function resetState(){
     while(answerElement.firstChild){
         answerElement.removeChild(answerElement.firstChild)
     }
 }
 
-function resetStateLast(){
-    questionElement.removeChild(questionElement.firstChild)
-    while(answerElement.firstChild){
-        answerElement.removeChild(answerElement.firstChild)
-    }
-}
-
-
+//This event listner will restart the game when you click on play again button
+ playAgain.addEventListener("click", function(){
+    location.reload();
+ })
