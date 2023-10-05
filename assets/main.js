@@ -58,27 +58,26 @@ function showQuestionsAndAnswers(){
     questionElement.innerHTML = currentQuestion.question;
     currentQuestionIndex++
     resetState()
+
+    var resultText = document.getElementById("result-text");
+    resultText.textContent = " ";
     
     currentQuestion.answers.forEach(answer=>{
         var answerButton = document.createElement("button");
         answerElement.appendChild(answerButton);
         answerButton.innerHTML = answer;
-        answerButton.addEventListener("click", showQuestionsAndAnswers);
-
+        answerButton.addEventListener("click", answerClick);
     })
-
+    //console.log(`correct==> ${questions[currentQuestionIndex].correct}`)
+    //console.log(`event ==> ${event.target.textContent}`)
 }
-
 function answerClick(event){
     var buttonElement = event.target;
-
-
-    if (buttonElement.value === questions[currentQuestionIndex].correct){
-        resultText.textContent = "Correct"
+    if(buttonElement.innerhHTML === questions[currentQuestionIndex -1].correct){
+        var resultText = document.getElementById("result-text");
+        resultText.textContent = "Answer is correct!"
     }
 }
-
-
 
 function countdown(){
     var timeLeft = 60;
