@@ -13,6 +13,7 @@ var scorePage = document.querySelector(".score-page");
 var score = 0;
 var scoreDisplay = document.querySelector(".scoredisplay")
 var timeLeft = 30;
+var intialBox = document.querySelector(".intialbox")
 
 //This is the questions variable that is holding all the quiz questions and answer options//
 var questions = [
@@ -47,8 +48,6 @@ var questions = [
     },
    
 ]
-
-
 
 startButton.addEventListener("click", function(){
     countdown();
@@ -137,3 +136,5 @@ function resetStateLast(){
         answerElement.removeChild(answerElement.firstChild)
     }
 }
+
+
