@@ -18,8 +18,11 @@ main{
     margin: 0 auto;
     height:40vh;
     line-height: 25px;
+    border:2px solid red;
 }
-
+h1{
+    text-align: center;
+}
 h2{
     text-align: center;
 }
@@ -39,4 +42,22 @@ p{
 
 .start{
     text-align: center;
+}
+.score-page{
+text-align: center;
+}
+.buttons{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    width:50%;
+    align-items: center;
+    margin: 0 auto;
+}
+.buttons{
+    margin-top: 10px;
+}
+
+#intialbox{
+    border-color: black;
 }
